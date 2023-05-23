@@ -1,0 +1,76 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ci_job:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies"
+          npm ci
+      - name: Build
+        run: |
+          echo "Building"
+          npm run build --if-present
+#      - name: Test
+#        run: |
+#          echo "Testing"
+#          npm test
+        env:
+          CI: true
+  cd_job:
+    name: Continuous Deployment
+    needs: ci_job
+    runs-on: ubuntu-latest
+#    if: github.event_name == 'push' && github.ref == 'refs/heads/' + github.event.repository.default_branch
+    if: github.event_name == 'push' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    steps:
+      - name: Set up SSH key
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key.pem
+          chmod 400 private_key.pem
+          sudo apt-get install -y sshpass
+      - name: Install AWS CLI
+        run: sudo apt-get install -y awscli
+      - name: Deploy to AWS EC2
+        run: |
+          ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_INSTANCE_IP_ADDRESS }} "\
+          if [ ! -d /var/www/nextjs-blog/.git ]; then \
+            echo 'Cloning the repository to /var/www...'; \
+            cd /var/www; \
+            git clone https://x-access-token:${{ secrets.GH_ACCESS_TOKEN }}@github.com/hsm2k3/nextjs-blog; \
+            echo 'Cloned the repository.'; \
+            openssl dhparam -out /var/www/nextjs-blog/ssl-dhparams.pem 2048; \
+            if [ -e /var/www/nextjs-blog/ssl-dhparams.pem ]; then \
+              echo 'Created ssl-dhparams.pem...'; \
+            fi; \
+          else \
+            cd /var/www/nextjs-blog && git pull; \
+            chmod +x /var/www/nextjs-blog/deployment/update_server.sh; \
+            ./deployment/update_server.sh; \
+          fi; \
+          echo 'Taking down current images...'; \
+          cd /var/www/nextjs-blog && sudo docker-compose down; \
+          echo 'Rebuilding containers...'; \
+          sudo docker-compose up --build -d"
+      
