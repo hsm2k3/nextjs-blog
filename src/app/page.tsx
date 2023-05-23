@@ -1,9 +1,39 @@
 import Image from 'next/image'
+import Link from "next/link";
+import cardStyles from './styles/card.module.css'
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
+      <div id="wrapper" className={cardStyles.wrapper}>
+        <section className={cardStyles.main_card}>
+          {/*<header className={styles.header}>*/}
+          <span className={cardStyles.avatar}>
+                        <Image src="/Screenshot-from-2023-02-21-12-16-29.svg" alt="A black and white picture of Alex"
+                               width={500} height={500}/>
+                    </span>
+          <h1>Alex Braverman</h1>
+          <p>Software Engineer</p>
+          <p>BS Computer Science</p>
+          <Link href="prologue">
+            Learn More
+          </Link>
+          {/*</header>*/}
+          <footer>
+            <ul className="icons">
+              <li><a href="https://www.linkedin.com/in/alex-braverman/"
+                     className="icon brands fa-linkedin">LinkedIn</a></li>
+              <li><a href="https://github.com/hsm2k3" className="icon brands fa-github">GitHub</a></li>
+              <li><a href="https://www.twitter.com/AlexBraverman4"
+                     className="icon brands fa-twitter">Twitter</a></li>
+              <li><a href="https://stackoverflow.com/users/7092930/alex"
+                     className="icon brands fa-stack-overflow">StackOverflow</a></li>
+              <li><a href="mailto: alex.braverman@protonmail.com" className="fa fa-envelope">E-mail</a></li>
+            </ul>
+          </footer>
+        </section>
+      </div>
+      {/*<div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
           <code className="font-mono font-bold">src/app/page.tsx</code>
@@ -107,7 +137,7 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
-      </div>
+      </div>*/}
     </main>
   )
 }

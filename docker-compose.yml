@@ -1,0 +1,58 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: .
+      args:
+        NODE_ENV: production
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - /app/node_modules
+    container_name: nextjs
+
+  nginx:
+    build: ./nginx
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN_NAMES=${DOCKER_DOMAIN_NAMES}
+      - CERTIFICATION_EMAIL=${DOCKER_CERTIFICATION_EMAIL}
+      - DOMAIN_PATH=${DOCKER_DOMAIN_PATH}
+      - SERVER_NAMES=${DOCKER_SERVER_NAMES}
+      - NODE_ENV=production
+    volumes:
+      - ./ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
+      - ./nginx/nginx.conf.prod.template:/etc/nginx/nginx.conf.prod.template:ro
+      - ./nginx/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf:ro
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    depends_on:
+      - app
+  certbot:
+    image: certbot/certbot
+    env_file:
+      - .env
+#    command: certonly --webroot --webroot-path=/var/www/certbot --email ${CERTIFICATION_EMAIL} --agree-tos --no-eff-email --staging --domains ${DOMAIN_NAMES} --non-interactive
+#    entrypoint: "/bin/sh -c 'chmod +x /scripts/ssl_renewal.sh && /scripts/ssl_renewal.sh && crond -f'"
+    entrypoint:
+    - /bin/sh
+    - -c
+    - |
+      echo "0 */12 * * * certbot renew --webroot -w /var/www/certbot --quiet --post-hook 'nginx -s reload'" |
+        crontab - && crond -f
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+      - ./nginx:/scripts
+    depends_on:
+      - nginx
