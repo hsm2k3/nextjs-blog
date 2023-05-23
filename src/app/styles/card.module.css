@@ -1,12 +1,9 @@
 .main_card {
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
-    -ms-transform: rotateX(0deg);
     transform: rotateX(0deg);
-    -moz-transition: opacity 1s ease, -moz-transform 1s ease;
-    -webkit-transition: opacity 1s ease, -webkit-transform 1s ease;
-    -ms-transition: opacity 1s ease, -ms-transform 1s ease;
     transition: opacity 1s ease, transform 1s ease;
+    -webkit-transition: opacity 1s ease, -webkit-transform 1s ease;
     padding: 4.5em 3em 3em 3em ;
     background: #ffffff;
     border-radius: 4px;
@@ -32,16 +29,13 @@
 }
 
 .wrapper {
-    display: -moz-flex;
-    display: -webkit-flex;
-    display: -ms-flex;
     display: flex;
+    display: -webkit-flex;
     -webkit-align-items: center;
     align-items: center;
     -webkit-justify-content: space-between;
     justify-content: space-between;
     -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
     -webkit-perspective: 1000px;
     perspective: 1000px;
