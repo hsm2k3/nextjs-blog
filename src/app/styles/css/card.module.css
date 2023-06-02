@@ -55,3 +55,8 @@
     width: 100%;
     max-width: 500px;
 }
+
+.icons li {
+    display: inline-block;
+    margin-right: 20px; /* adjust as needed for spacing */
+}

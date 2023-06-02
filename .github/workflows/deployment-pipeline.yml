@@ -56,21 +56,23 @@ jobs:
         run: |
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_INSTANCE_IP_ADDRESS }} "\
           if [ ! -d /var/www/nextjs-blog/.git ]; then \
-            echo 'Cloning the repository to /var/www...'; \
+            echo '### Cloning the repository to /var/www...'; \
             cd /var/www; \
             git clone https://x-access-token:${{ secrets.GH_ACCESS_TOKEN }}@github.com/hsm2k3/nextjs-blog; \
-            echo 'Cloned the repository.'; \
+            echo '### Cloned the repository.'; \
+            echo '### Creating ssl-dhparams.pem...'; \
             openssl dhparam -out /var/www/nextjs-blog/ssl-dhparams.pem 2048; \
             if [ -e /var/www/nextjs-blog/ssl-dhparams.pem ]; then \
-              echo 'Created ssl-dhparams.pem...'; \
+              echo '### Created ssl-dhparams.pem...'; \
             fi; \
           else \
             cd /var/www/nextjs-blog && git pull; \
             chmod +x /var/www/nextjs-blog/deployment/update_server.sh; \
+            echo '### Updating server...'; \ 
             ./deployment/update_server.sh; \
           fi; \
-          echo 'Taking down current images...'; \
+          echo '### Taking down current images...'; \
           cd /var/www/nextjs-blog && sudo docker-compose down; \
-          echo 'Rebuilding containers...'; \
+          echo '### Rebuilding containers...'; \
           sudo docker-compose up --build -d"
       
