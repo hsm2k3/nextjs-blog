@@ -11,6 +11,7 @@ const CardFooter = () => {
             <ul className={cardStyles.icons}>
                 <li>
                     <a href="https://www.linkedin.com/in/alex-braverman/"
+                       target="_blank"
                        className="icon brands fa-linkedin">
                     <FontAwesomeIcon
                         icon={faLinkedin}
@@ -19,7 +20,9 @@ const CardFooter = () => {
                     </a>
                 </li>
                 <li>
-                    <a href="https://github.com/hsm2k3" className="icon brands fa-github">
+                    <a href="https://github.com/hsm2k3"
+                       target="_blank"
+                       className="icon brands fa-github">
                     <FontAwesomeIcon
                         icon={faGithub}
                         style={{color: "rgba(23, 21, 21, 1.0)", fontSize: iconFontSize}}
@@ -28,6 +31,7 @@ const CardFooter = () => {
                 </li>
                 <li>
                     <a href="https://www.twitter.com/AlexBraverman4"
+                       target="_blank"
                        className="icon brands fa-twitter">
                     <FontAwesomeIcon
                         icon={faTwitter}
@@ -37,6 +41,7 @@ const CardFooter = () => {
                 </li>
                 <li>
                     <a href="https://stackoverflow.com/users/7092930/alex"
+                       target="_blank"
                        className="icon brands fa-stack-overflow">
                     <FontAwesomeIcon
                         icon={faStackOverflow}
