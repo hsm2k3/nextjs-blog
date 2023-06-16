@@ -2,6 +2,7 @@ import React from "react";
 import cardStyles from "@/app/styles/css/card.module.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGithub, faLinkedin, faStackOverflow, faTwitter} from "@fortawesome/free-brands-svg-icons";
+import {faFile} from "@fortawesome/free-solid-svg-icons";
 
 const iconFontSize = 64;
 
@@ -16,6 +17,7 @@ const CardFooter = () => {
                     <FontAwesomeIcon
                         icon={faLinkedin}
                         style={{color: "rgba(0, 114, 177, 1.0)", fontSize: iconFontSize}}
+                        title={"Check out my LinkedIn"}
                     />
                     </a>
                 </li>
@@ -26,6 +28,7 @@ const CardFooter = () => {
                     <FontAwesomeIcon
                         icon={faGithub}
                         style={{color: "rgba(23, 21, 21, 1.0)", fontSize: iconFontSize}}
+                        title={"Check out my GitHub"}
                     />
                     </a>
                 </li>
@@ -36,6 +39,7 @@ const CardFooter = () => {
                     <FontAwesomeIcon
                         icon={faTwitter}
                         style={{color: "rgba(0, 172, 238, 1.0)", fontSize: iconFontSize}}
+                        title={"Check out my Twitter"}
                     />
                     </a>
                 </li>
@@ -46,9 +50,17 @@ const CardFooter = () => {
                     <FontAwesomeIcon
                         icon={faStackOverflow}
                         style={{color: "rgba(239, 130, 54, 1.0)", fontSize: iconFontSize}}
+                        title={"Check out my Stack Overflow"}
                     />
                     </a>
                 </li>
+                <li><a href="/app/public/Resume_2023.pdf" download>
+                    <FontAwesomeIcon
+                        icon={faFile}
+                        style={{color: "rgba(23, 21, 21, 1.0)", fontSize: iconFontSize}}
+                        title={"Download my resume"}
+                    />
+                </a></li>
             </ul>
         </div>
     );
