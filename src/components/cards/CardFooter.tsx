@@ -54,7 +54,7 @@ const CardFooter = () => {
                     />
                     </a>
                 </li>
-                <li><a href="/app/public/Alex%20Braverman%20Resume%202023.pdf" download>
+                <li><a href="/assets/Alex%20Braverman%20Resume%202023.pdf" download>
                     <FontAwesomeIcon
                         icon={faFile}
                         style={{color: "rgba(23, 21, 21, 1.0)", fontSize: iconFontSize}}

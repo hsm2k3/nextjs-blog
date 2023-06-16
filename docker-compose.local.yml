@@ -21,7 +21,6 @@ services:
       - /app/node_modules
       - ./public:/app/public
       - /app/.next
-      - ./src/app/assets/Alex Braverman Resume 2023.pdf:/app/public/Alex Braverman Resume 2023.pdf
     container_name: nextjs
     restart: always
 
