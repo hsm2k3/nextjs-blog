@@ -15,7 +15,6 @@ services:
       - ./src:/app/src
       - ./public:/app/public
       - /app/node_modules
-      - ./src/app/assets/Alex Braverman Resume 2023.pdf:/app/public/Alex Braverman Resume 2023.pdf
     container_name: nextjs
 
   nginx:
