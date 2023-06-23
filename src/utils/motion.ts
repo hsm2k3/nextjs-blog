@@ -1,7 +1,7 @@
 export const navVariants = {
     hidden: {
         opacity: 0,
-        y: -50,
+        x: -50, // Update y: -50 to x: -50
         transition: {
             type: 'spring',
             stiffness: 300,
@@ -10,11 +10,26 @@ export const navVariants = {
     },
     show: {
         opacity: 1,
-        y: 0,
+        x: 0, // Update y: 0 to x: 0
         transition: {
             type: 'spring',
             stiffness: 80,
             delay: 1,
+        },
+    },
+};
+
+export const burstVariants = {
+    initial: {
+        scale: 0,
+        opacity: 0,
+    },
+    burst: {
+        scale: 1,
+        opacity: 1,
+        transition: {
+            duration: 0.5,
+            ease: "easeOut",
         },
     },
 };

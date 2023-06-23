@@ -4,9 +4,14 @@ import { motion } from 'framer-motion';
 import { navVariants} from "@/utils/motion";
 import { styles } from "@/app/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faDiagramProject, faBlog } from "@fortawesome/free-solid-svg-icons";
+import {useState} from "react";
+import {AboutMe} from "@/components/AboutMe";
 
 export const Navbar = () => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [showAboutMe, setShowAboutMe] = useState(true);
+
     return (
         <motion.nav
             className={styles.navbar}
@@ -14,11 +19,24 @@ export const Navbar = () => {
             initial="hidden"
             whileInView="show"
             >
-            <div className="text-lg font-bold">Navbar</div>
             <div className="flex space-x-4">
-                <a href="#" className="text-blue-500 hover:text-blue-700"><FontAwesomeIcon icon={faUser} /> {" "} About Me</a>
-                <a href="#" className="text-blue-500 hover:text-blue-700">Projects</a>
-                <a href="#" className="text-blue-500 hover:text-blue-700">Blog</a>
+                <ul className="space-y-4">
+                    <li>
+                        <a href="#">
+                            <FontAwesomeIcon icon={faUser} /> {" "} About Me
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <FontAwesomeIcon icon={faDiagramProject} /> {" "}Projects
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <FontAwesomeIcon icon={faBlog} /> {" "}Blog
+                        </a>
+                    </li>
+                </ul>
             </div>
         </motion.nav>
     )
