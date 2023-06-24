@@ -9,8 +9,12 @@ import {useState} from "react";
 import {AboutMe} from "@/components/AboutMe";
 
 export const Navbar = () => {
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [isMobile, setIsMobile] = useState(false);
     const [showAboutMe, setShowAboutMe] = useState(true);
+
+    if(typeof window !== "undefined") {
+        window.innerWidth <= 768 ? setIsMobile(true) : setIsMobile(false);
+    }
 
     return (
         <motion.nav
