@@ -5,16 +5,9 @@ import { navVariants} from "@/utils/motion";
 import { styles } from "@/app/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faDiagramProject, faBlog } from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
-import {AboutMe} from "@/components/AboutMe";
 
 export const Navbar = () => {
-    const [isMobile, setIsMobile] = useState(false);
-    const [showAboutMe, setShowAboutMe] = useState(true);
 
-    if(typeof window !== "undefined") {
-        window.innerWidth <= 768 ? setIsMobile(true) : setIsMobile(false);
-    }
 
     return (
         <motion.nav
