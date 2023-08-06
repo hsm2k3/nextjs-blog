@@ -29,8 +29,8 @@ export const Navbar = () => {
                     <Image
                         src={"/menu.svg"}
                         alt="Menu"
-                        width={50}
-                        height={50}
+                        width={35}
+                        height={35}
                     />
                 </div>
                 {/* Navigation Links */}
