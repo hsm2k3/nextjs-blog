@@ -32,3 +32,28 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Configuration
+
+This project is set up to run both locally and in production with docker.
+
+To run it locally for development simply use the `docker compose -f docker-compose.local.yml up --build` to build and run the application.
+
+Reference the `docker-compose.yml` file for the environment variables that need to be set.
+
+There are several environment variables that are required to run the application in production:
+
+
+```angular2html
+DOCKER_DOMAIN_NAMES=
+DOCKER_CERTIFICATION_EMAIL=
+DOCKER_DOMAIN_PATH=
+DOCKER_SERVER_NAMES=
+DOCKER_NODE_ENV=
+```
+
+These need to be added to the `.env` file in the root of the project.
+
+
+

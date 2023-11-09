@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faDiagramProject, faBlog } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import {useState} from "react";
+import Link from "next/link";
 
 export const Navbar = () => {
 
@@ -36,19 +37,20 @@ export const Navbar = () => {
                 {/* Navigation Links */}
                 <ul className={`space-y-4 ${isNavbarVisible ? 'block' : 'hidden'}`}> {/* Use CSS classes to show/hide */}
                     <li>
-                        <a href="#">
+                        {/* Link to about me page */}
+                        <Link href={"/prologue/about-me"} className={"about-me-link"} >
                             <FontAwesomeIcon icon={faUser} /> {" "} About Me
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link href={"/prologue/projects"} className={"projects-link"} >
                             <FontAwesomeIcon icon={faDiagramProject} /> {" "}Projects
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link href={"/prologue/blog"} className={"blog-link"} >
                             <FontAwesomeIcon icon={faBlog} /> {" "}Blog
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
