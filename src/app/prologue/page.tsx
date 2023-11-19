@@ -8,7 +8,7 @@ const Page = () => {
 
     return (
             <div>
-                Hi
+                Hi from prologue and stuff
             </div>
     );
 };

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Navbar} from "@/components/bars/Navbar";
+import {styles} from "@/app/styles/styles";
 
 
 type LayoutProps = {
@@ -10,7 +11,7 @@ type LayoutProps = {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     return(
 
-            <div className={"flex min-h-screen flex-col items-center justify-between p-24"}>
+            <div className={styles.prologue}>
                 <div className="navbar-container">
                     <Navbar />
                     {/*{componentToRender}*/}
