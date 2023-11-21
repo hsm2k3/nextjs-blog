@@ -51,8 +51,8 @@ services:
       echo "0 */12 * * * certbot renew --webroot -w /var/www/certbot --quiet --post-hook 'nginx -s reload'" |
         crontab - && crond -f
     volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
       - ./nginx:/scripts
     depends_on:
       - nginx
