@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { navVariants} from "@/utils/motion";
 import { styles } from "@/app/styles/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faDiagramProject, faBlog } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faDiagramProject, faBlog, faHome } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import Link from "next/link";
@@ -43,7 +43,7 @@ export const Navbar = () => {
                 <ul className={`space-y-4 ${isNavbarVisible ? 'block' : 'hidden'}`}> {/* Use CSS classes to show/hide */}
                     <li>
                         <Link href={"/"} className={"home-link"} onClick={toggleNavbar}>
-                            <FontAwesomeIcon icon={faUser} /> {" "}Home
+                            <FontAwesomeIcon icon={faHome} /> {" "}Home
                         </Link>
                     </li>
                     <li>
