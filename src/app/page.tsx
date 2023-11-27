@@ -9,7 +9,7 @@ export default function Home() {
             <div id="wrapper" className={cardStyles.wrapper}>
                 <section className={cardStyles.main_card}>
           <span className={cardStyles.avatar}>
-            <Image src="/Screenshot-from-2023-02-21-12-16-29.svg"
+            <Image src="/alex.svg"
                    alt="A black and white picture of Alex"
                    width={500}
                    height={500}
