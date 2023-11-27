@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOMAIN_NAME="www.mydomainhere.com"
+DOMAIN_NAME="www.alexanderbraverman.com"
 WEBROOT_PATH="/var/www/certbot"
 
 # Check if the HTTPS site is available
