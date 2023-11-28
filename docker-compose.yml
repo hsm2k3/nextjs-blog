@@ -59,4 +59,3 @@ services:
     depends_on:
       - nginx
     container_name: certbot
-
