@@ -38,6 +38,8 @@ services:
       - ./certbot/www:/var/www/certbot
     depends_on:
       - app
+    container_name: nginx
+
   certbot:
     image: certbot/certbot
     env_file:
@@ -56,3 +58,5 @@ services:
       - ./nginx:/scripts
     depends_on:
       - nginx
+    container_name: certbot
+
