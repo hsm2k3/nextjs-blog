@@ -1,3 +1,8 @@
+#nextjs-blog
+[![CI/CD Pipeline](https://github.com/hsm2k3/nextjs-blog/actions/workflows/deployment-pipeline.yml/badge.svg)](https://github.com/hsm2k3/nextjs-blog/actions/workflows/deployment-pipeline.yml)
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
