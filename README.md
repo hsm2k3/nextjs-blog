@@ -1,3 +1,8 @@
+# Setup
+
+run ``npm install`` then run ``npm install framer-motion`` to install manually. TODO: automate framer-motion installation.
+
+
 # nextjs-blog
 
 [![CI/CD Pipeline](https://github.com/hsm2k3/nextjs-blog/actions/workflows/deployment-pipeline.yml/badge.svg)](https://github.com/hsm2k3/nextjs-blog/actions/workflows/deployment-pipeline.yml)
