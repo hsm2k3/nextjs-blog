@@ -4,8 +4,15 @@ FROM node:20
 # Set the working directory in the container
 WORKDIR /app
 
+# Define build arguments
+ARG USERNAME=ec2-user
+
 # Copy package.json and package-lock.json files into the working directory
 COPY package.json package-lock.json ./
+
+
+# Create a new user in the container
+RUN useradd -m ${USERNAME}
 
 # Install the application's dependencies
 RUN npm ci
