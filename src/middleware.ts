@@ -4,6 +4,8 @@ export const config = {
     matcher: ['/prologue'],
 }
 
+// refresh
+
 export function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     const { device } = userAgent(request);
