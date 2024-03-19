@@ -30,6 +30,12 @@ services:
       - DOMAIN_PATH=${DOCKER_DOMAIN_PATH}
       - SERVER_NAMES=${DOCKER_SERVER_NAMES}
       - NODE_ENV=production
+    entrypoint:
+        - /bin/sh
+        - -c
+        - |
+          echo "0 */12 * * * certbot renew --webroot -w /var/www/certbot --quiet --post-hook 'nginx -s reload'" |
+            crontab - && crond -f
     volumes:
       - ./ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
       - ./nginx/nginx.conf.prod.template:/etc/nginx/nginx.conf.prod.template:ro
