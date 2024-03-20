@@ -74,5 +74,5 @@ jobs:
           echo '### Taking down current images...'; \
           cd /var/www/nextjs-blog && sudo docker-compose down; \
           echo '### Rebuilding containers...'; \
-          sudo docker-compose up --build -d"
+          docker-compose up --build -d"
       
