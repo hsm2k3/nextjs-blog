@@ -62,6 +62,7 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
       - ./nginx:/scripts
+      - /var/run/docker.sock:/var/run/docker.sock  # Add this to allow docker commands to be run inside the container
     depends_on:
       - nginx
     container_name: certbot
