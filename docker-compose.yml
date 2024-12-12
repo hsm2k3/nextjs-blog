@@ -19,7 +19,6 @@ services:
 
   nginx:
     build: ./nginx
-    user: 1000:1000
     env_file:
       - .env
     ports:
@@ -49,7 +48,6 @@ services:
 
   certbot:
     image: certbot/certbot
-    user: 1000:1000
     env_file:
       - .env
 #    command: certonly --webroot --webroot-path=/var/www/certbot --email ${CERTIFICATION_EMAIL} --agree-tos --no-eff-email --staging --domains ${DOMAIN_NAMES} --non-interactive
