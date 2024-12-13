@@ -57,7 +57,7 @@ services:
     - -c
     - |
       touch /var/log/letsencrypt/renewal.log
-      echo "0 */12 * * * certbot renew --webroot -w /var/www/certbot --quiet --post-hook 'docker exec -i nginx nginx -s reload' >> /var/log/letsencrypt/renewal.log 2>&1" |
+      echo "0 */12 * * * certbot renew --webroot -w /var/www/certbot --quiet --post-hook 'docker exec -i nginx /usr/sbin/nginx -s reload'" |
         crontab - && crond -f
     volumes:
       - ./certbot/conf:/etc/letsencrypt
