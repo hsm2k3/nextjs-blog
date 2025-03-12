@@ -51,7 +51,7 @@ jobs:
           chmod 400 private_key.pem
           sudo apt-get install -y sshpass
       - name: Install AWS CLI
-        run: sudo apt-get install -y awscli
+#        run: sudo apt-get install -y awscli
       - name: Deploy to AWS EC2
         run: |
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_INSTANCE_IP_ADDRESS }} "\
