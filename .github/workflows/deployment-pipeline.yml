@@ -50,7 +50,7 @@ jobs:
           echo "$PRIVATE_KEY" > private_key.pem
           chmod 400 private_key.pem
           sudo apt-get install -y sshpass
-      - name: Install AWS CLI
+#      - name: Install AWS CLI
 #        run: sudo apt-get install -y awscli
       - name: Deploy to AWS EC2
         run: |
