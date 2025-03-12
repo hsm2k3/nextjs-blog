@@ -55,9 +55,6 @@ services:
     - /bin/sh
     - -c
     - |
-      # Install Docker CLI
-      apk add --no-cache docker-cli
-      # Set up cron job
       echo "0 */12 * * * certbot renew --webroot -w /var/www/certbot --quiet --post-hook 'docker exec -i nginx nginx -s reload'" |
         crontab - && crond -f
     volumes:
@@ -65,6 +62,7 @@ services:
       - ./certbot/www:/var/www/certbot
       - ./nginx:/scripts
       - /var/run/docker.sock:/var/run/docker.sock  # Add this to allow docker commands to be run inside the container
+      - /usr/bin/docker:/usr/bin/docker:ro  # Add this to allow docker commands to be run inside the container. :ro at the end of a volume mount means a contianer can only read-only access the files in the volume.
     depends_on:
       - nginx
     container_name: certbot
