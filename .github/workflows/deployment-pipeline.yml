@@ -53,9 +53,15 @@ jobs:
 #        currently awscli is preinstalled on the runner
 #      - name: Install AWS CLI
 #        run: sudo apt-get install -y awscli
+
+      - name: Update Environment Variables
+        run: |
+          echo "Updating environment variables on EC2..."
+          ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_INSTANCE_IP_ADDRESS }} "\
+          cd /var/www/nextjs-blog && \
+          sed -i 's/DOCKER_CERTIFICATION_EMAIL=.*/DOCKER_CERTIFICATION_EMAIL=${{ secrets.DOCKER_CERTIFICATION_EMAIL }}/g' .env"
       - name: Deploy to AWS EC2
         run: |
-          sed -i 's/DOCKER_CERTIFICATION_EMAIL=.*/DOCKER_CERTIFICATION_EMAIL=${{ secrets.DOCKER_CERTIFICATION_EMAIL }}/g' .env \
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_INSTANCE_IP_ADDRESS }} "\
           if [ ! -d /var/www/nextjs-blog/.git ]; then \
             echo '### Cloning the repository to /var/www...'; \
