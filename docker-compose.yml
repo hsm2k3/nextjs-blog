@@ -25,7 +25,7 @@ services:
       - "443:443"
     environment:
       - DOMAIN_NAMES=${DOCKER_DOMAIN_NAMES}
-      - CERTIFICATION_EMAIL=${DOCKER_CERTIFICATION_EMAIL}
+      - CERTIFICATION_EMAIL=${{ secrets.DOCKER_CERTIFICATION_EMAIL }}
       - DOMAIN_PATH=${DOCKER_DOMAIN_PATH}
       - SERVER_NAMES=${DOCKER_SERVER_NAMES}
       - NODE_ENV=production
@@ -55,6 +55,7 @@ services:
     - /bin/sh
     - -c
     - |
+      certbot renew --webroot -w /var/www/certbot --quiet && 
       echo "0 */12 * * * certbot renew --webroot -w /var/www/certbot --quiet --post-hook 'docker exec -i nginx nginx -s reload'" |
         crontab - && crond -f
     volumes:
