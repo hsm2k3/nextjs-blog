@@ -55,6 +55,8 @@ jobs:
 #        run: sudo apt-get install -y awscli
       - name: Deploy to AWS EC2
         run: |
+          sed -i 's/DOCKER_CERTIFICATION_EMAIL=.*/DOCKER_CERTIFICATION_EMAIL=${{ secrets.DOCKER_CERTIFICATION_EMAIL }}/g' .env
+#         Add other environment variables as needed above.
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_INSTANCE_IP_ADDRESS }} "\
           if [ ! -d /var/www/nextjs-blog/.git ]; then \
             echo '### Cloning the repository to /var/www...'; \
@@ -76,4 +78,4 @@ jobs:
           cd /var/www/nextjs-blog && sudo docker-compose down; \
           echo '### Rebuilding containers...'; \
           docker-compose up --build -d"
-      
+
