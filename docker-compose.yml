@@ -55,6 +55,7 @@ services:
     - /bin/sh
     - -c
     - |
+      certbot renew --webroot -w /var/www/certbot --quiet && 
       echo "0 */12 * * * certbot renew --webroot -w /var/www/certbot --quiet --post-hook 'docker exec -i nginx nginx -s reload'" |
         crontab - && crond -f
     volumes:

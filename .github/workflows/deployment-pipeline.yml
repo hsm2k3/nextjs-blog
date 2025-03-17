@@ -50,11 +50,15 @@ jobs:
           echo "$PRIVATE_KEY" > private_key.pem
           chmod 400 private_key.pem
           sudo apt-get install -y sshpass
+#        currently awscli is preinstalled on the runner
 #      - name: Install AWS CLI
 #        run: sudo apt-get install -y awscli
       - name: Deploy to AWS EC2
         run: |
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_INSTANCE_IP_ADDRESS }} "\
+          cd /var/www/nextjs-blog && \
+          echo \"${{ secrets.ENV_FILE }}\" > .env && \
+          echo 'Environment file updated successfully' && \
           if [ ! -d /var/www/nextjs-blog/.git ]; then \
             echo '### Cloning the repository to /var/www...'; \
             cd /var/www; \
@@ -75,4 +79,4 @@ jobs:
           cd /var/www/nextjs-blog && sudo docker-compose down; \
           echo '### Rebuilding containers...'; \
           docker-compose up --build -d"
-      
+
