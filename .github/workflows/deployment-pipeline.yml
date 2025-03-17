@@ -58,7 +58,7 @@ jobs:
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_INSTANCE_IP_ADDRESS }} "\
           cd /var/www/nextjs-blog && \
           echo \"${{ secrets.ENV_FILE }}\" > .env && \
-          echo 'Environment file updated successfully'"
+          echo 'Environment file updated successfully' && \
           if [ ! -d /var/www/nextjs-blog/.git ]; then \
             echo '### Cloning the repository to /var/www...'; \
             cd /var/www; \
@@ -78,5 +78,5 @@ jobs:
           echo '### Taking down current images...'; \
           cd /var/www/nextjs-blog && sudo docker-compose down; \
           echo '### Rebuilding containers...'; \
-          docker-compose --env-file .env up --build -d"
+          docker-compose up --build -d"
 
