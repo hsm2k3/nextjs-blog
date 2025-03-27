@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import cardStyles from './styles/css/card.module.css';
+import cardStyles from '@/app/styles/css/card.module.css';
 import CardDescription from "@/components/cards/CardDescription";
 import CardFooter from "@/components/cards/CardFooter";
 
