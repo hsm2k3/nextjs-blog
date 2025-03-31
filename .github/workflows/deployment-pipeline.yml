@@ -83,7 +83,7 @@ jobs:
           sleep 30 && \
           if docker ps | grep -q 'nextjs' && docker ps | grep -q 'nginx'; then \
           echo '### Containers are running, cleaning up unused volumes...' && \
-          docker volume prune -f && \
+          docker system prune -af --volumes && \
           echo '### Volume cleanup complete'; \
           else \
           echo '### Container startup check failed, skipping volume cleanup'; \
