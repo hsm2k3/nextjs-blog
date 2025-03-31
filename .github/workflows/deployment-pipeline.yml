@@ -78,5 +78,14 @@ jobs:
           echo '### Taking down current images...'; \
           cd /var/www/nextjs-blog && sudo docker-compose down; \
           echo '### Rebuilding containers...'; \
-          docker-compose up --build -d"
+          docker-compose up --build -d && \
+          echo '### Waiting for containers to be healthy...' && \
+          sleep 30 && \
+          if docker ps | grep -q 'nextjs' && docker ps | grep -q 'nginx'; then \
+          echo '### Containers are running, cleaning up unused volumes...' && \
+          docker volume prune -f && \
+          echo '### Volume cleanup complete'; \
+          else \
+          echo '### Container startup check failed, skipping volume cleanup'; \
+          fi"
 
