@@ -2,11 +2,13 @@ import cardStyles from '@/app/styles/css/card.module.css';
 import Image from "next/image";
 import CardDescription from "@/components/cards/CardDescription";
 import CardFooter from "@/components/cards/CardFooter";
+import { PostHog } from "./providers"
 
 
 
 export default function Home() {
     return (
+      <PostHog>
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <div id="wrapper" className={cardStyles.wrapper}>
                 <section className={cardStyles.main_card}>
@@ -22,5 +24,6 @@ export default function Home() {
                 </section>
             </div>
         </main>
+        </PostHog>
     )
 }
