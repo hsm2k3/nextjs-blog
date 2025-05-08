@@ -54,17 +54,21 @@ jobs:
 #      - name: Install AWS CLI
 #        run: sudo apt-get install -y awscli
       - name: Deploy to AWS EC2
+        env:
+          EC2_INSTANCE_IP_ADDRESS: ${{ secrets.EC2_INSTANCE_IP_ADDRESS }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          GIT_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
         run: |
-          ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_INSTANCE_IP_ADDRESS }} "\
+          ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@"$EC2_INSTANCE_IP_ADDRESS" "\
           cd /var/www/nextjs-blog && \
           echo '### Backing up environment file...' \
           cp -f .env .env.backup; \
-          echo \"${{ secrets.ENV_FILE }}\" > .env && \
+          echo \"$ENV_FILE\" > .env && \
           echo 'Environment file updated successfully' && \
           if [ ! -d /var/www/nextjs-blog/.git ]; then \
             echo '### Cloning the repository to /var/www...'; \
             cd /var/www; \
-            git clone https://x-access-token:${{ secrets.GH_ACCESS_TOKEN }}@github.com/hsm2k3/nextjs-blog; \
+            git clone https://x-access-token:$GIT_TOKEN@github.com/hsm2k3/nextjs-blog; \
             echo '### Cloned the repository.'; \
             echo '### Creating ssl-dhparams.pem...'; \
             openssl dhparam -out /var/www/nextjs-blog/ssl-dhparams.pem 2048; \
@@ -85,7 +89,7 @@ jobs:
               git reset --hard origin/main; \
             fi \
             chmod +x /var/www/nextjs-blog/deployment/update_server.sh; \
-            echo '### Updating server...'; \ 
+            echo '### Updating server...'; \
             ./deployment/update_server.sh; \
           fi; \
           echo '### Taking down current images...'; \
