@@ -90,8 +90,8 @@ jobs:
           fi; \
           echo '### Taking down current images...'; \
           cd /var/www/nextjs-blog && sudo docker-compose down; \
-          echo '### Rebuilding containers...'; \
-          docker-compose up --build -d && \
+          echo '### Rebuilding containers with fresh code...' \
+          docker-compose up -d --force-recreate --no-deps --build \
           echo '### Waiting for containers to be healthy...' && \
           sleep 30 && \
           if docker ps | grep -q 'nextjs' && docker ps | grep -q 'nginx'; then \
