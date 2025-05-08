@@ -78,7 +78,7 @@ jobs:
           else \
             echo '### Refreshing repository code...'; \
             cd /var/www/nextjs-blog; \
-            echo '### Try git pull first, which is safer...';
+            echo '### Try git pull first, which is safer...'; \
             if git pull origin main; then \
               echo '### Repository updated successfully with git pull'; \
             else \
@@ -87,7 +87,7 @@ jobs:
               echo '### Force fetch and reset as fallback...'; \
               git fetch origin; \
               git reset --hard origin/main; \
-            fi \
+            fi; \
             chmod +x /var/www/nextjs-blog/deployment/update_server.sh; \
             echo '### Updating server...'; \
             ./deployment/update_server.sh; \
