@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from "next/link";
-import FontAwesomeIcon from '@/components/fontawesome/DynamicFontAwesomeIcon';
+import DynamicFontAwesomeIcon from '@/components/fontawesome/DynamicFontAwesomeIcon';
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const CardDescription = () => {
@@ -12,7 +12,7 @@ const CardDescription = () => {
             <p>Software Engineer</p>
             <p>BS Computer Science</p>
             <Link href="prologue" className={"prologue-link"}>
-                <FontAwesomeIcon icon={faChevronRight} />
+                <DynamicFontAwesomeIcon icon={faChevronRight} />
                 { " " }
                 Learn More
             </Link>
