@@ -1,25 +1,13 @@
 'use client'
 import React, {useEffect, useState} from "react";
 import cardStyles from "@/app/styles/css/card.module.css";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import FontAwesomeIcon from '@/components/fontawesome/DynamicFontAwesomeIcon';
 import {faGithub, faLinkedin, faStackOverflow, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {faFile} from "@fortawesome/free-solid-svg-icons";
 
 const iconFontSize = 64;
 
 const CardFooter = () => {
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-
-    // Return a placeholder during server rendering
-    if (!isClient) {
-        return <div className={cardStyles.icons}>Loading social links...</div>;
-    }
-
-    // Full component renders only on the client
     return (
         <div>
             <ul className={cardStyles.icons}>

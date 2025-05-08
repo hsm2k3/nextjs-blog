@@ -1,9 +1,9 @@
-// 'use client'
+'use client'
 
 import React from 'react';
 import Link from "next/link";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import FontAwesomeIcon from '@/components/fontawesome/DynamicFontAwesomeIcon';
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const CardDescription = () => {
     return (
