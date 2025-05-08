@@ -32,3 +32,9 @@ ENV NODE_ENV=${DOCKER_NODE_ENV}
 
 # Start the Next.js application based on the environment
 CMD [ "sh", "-c", "if [ \"$NODE_ENV\" = \"development\" ]; then npm run dev; else npm start; fi" ]
+
+# Current build date and git commit
+ARG BUILD_DATE=unknown
+ARG GIT_COMMIT=unknown
+LABEL build_date=$BUILD_DATE
+LABEL git_commit=$GIT_COMMIT

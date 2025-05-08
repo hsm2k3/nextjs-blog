@@ -4,6 +4,8 @@ services:
       context: .
       args:
         NODE_ENV: production
+        BUILD_DATE: $(date -u +'%Y-%m-%dT%H:%M:%SZ')
+        GIT_COMMIT: $(git rev-parse HEAD)
     env_file:
       - .env
     environment:

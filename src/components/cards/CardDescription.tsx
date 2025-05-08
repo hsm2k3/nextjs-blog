@@ -11,11 +11,11 @@ const CardDescription = () => {
             <h1>Alex Braverman</h1>
             <p>Software Engineer</p>
             <p>BS Computer Science</p>
-            {/*<Link href="prologue" className={"prologue-link"}>*/}
-            {/*    <FontAwesomeIcon icon={faChevronRight} />*/}
-            {/*    { " " }*/}
-            {/*    Learn More*/}
-            {/*</Link>*/}
+            <Link href="prologue" className={"prologue-link"}>
+                <FontAwesomeIcon icon={faChevronRight} />
+                { " " }
+                Learn More
+            </Link>
         </div>
     );
 };
