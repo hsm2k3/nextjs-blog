@@ -57,7 +57,7 @@ jobs:
         run: |
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_INSTANCE_IP_ADDRESS }} "\
           cd /var/www/nextjs-blog && \
-          echo "### Backing up environment file..." \
+          echo '### Backing up environment file...' \
           cp -f .env .env.backup \
           echo \"${{ secrets.ENV_FILE }}\" > .env && \
           echo 'Environment file updated successfully' && \
@@ -76,9 +76,9 @@ jobs:
             cd /var/www/nextjs-blog \
             # Try git pull first, which is safer
             if git pull origin main; then \
-              echo "### Repository updated successfully with git pull" \
+              echo '### Repository updated successfully with git pull' \
             else \
-              echo "### Git pull failed, trying hard reset..." \
+              echo '### Git pull failed, trying hard reset...' \
               echo '### Backing up environment file...' \
               # Force fetch and reset as fallback
               git fetch origin \
