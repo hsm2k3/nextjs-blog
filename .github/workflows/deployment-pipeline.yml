@@ -94,6 +94,9 @@ jobs:
           fi; \
           echo '### Taking down current images...'; \
           cd /var/www/nextjs-blog && sudo docker-compose down; \
+          echo '### Setting build variables...'; \
+          export BUILD_DATE=\$(date -u +'%Y-%m-%dT%H:%M:%SZ'); \
+          export GIT_COMMIT=\$(git rev-parse HEAD); \
           echo '### Rebuilding containers with fresh code...'; \
           docker-compose up -d --force-recreate --no-deps --build; \
           echo '### Waiting for containers to be healthy...'; \
