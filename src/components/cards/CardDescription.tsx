@@ -2,9 +2,9 @@
 
 import React, {useEffect, useState} from 'react';
 import cardStyles from "@/app/styles/css/card.module.css";
-import Link from "next/link";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+// import Link from "next/link";
+// import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+// import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const CardDescription = () => {
     const [isClient, setIsClient] = useState(false);
@@ -24,11 +24,11 @@ const CardDescription = () => {
             <h1>Alex Braverman</h1>
             <p>Software Engineer</p>
             <p>BS Computer Science</p>
-            <Link href="prologue" className={"prologue-link"}>
-                <FontAwesomeIcon icon={faChevronRight} />
-                { " " }
-                Learn More
-            </Link>
+            {/*<Link href="prologue" className={"prologue-link"}>*/}
+            {/*    <FontAwesomeIcon icon={faChevronRight} />*/}
+            {/*    { " " }*/}
+            {/*    Learn More*/}
+            {/*</Link>*/}
         </div>
     );
 };
