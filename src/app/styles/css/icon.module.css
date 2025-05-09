@@ -1,0 +1,19 @@
+.icon {
+    display: inline-block;
+}
+
+.linkedin {
+    filter: invert(29%) sepia(94%) saturate(1946%) hue-rotate(187deg) brightness(96%) contrast(101%);
+}
+
+.github {
+    filter: invert(7%) sepia(11%) saturate(16%) hue-rotate(314deg) brightness(97%) contrast(91%);
+}
+
+.file-cv {
+    filter: invert(7%) sepia(11%) saturate(16%) hue-rotate(314deg) brightness(97%) contrast(91%);
+}
+
+.chevron-right-square {
+    filter: invert(7%) sepia(11%) saturate(16%) hue-rotate(314deg) brightness(97%) contrast(91%);
+}
