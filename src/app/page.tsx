@@ -2,6 +2,7 @@ import cardStyles from '@/app/styles/css/card.module.css';
 import Image from "next/image";
 import CardDescription from "@/components/cards/CardDescription";
 import CardFooter from "@/components/cards/CardFooter";
+import ClientOnly from "@/components/ClientOnly";
 
 export const dynamic = 'force-dynamic';
 
@@ -16,8 +17,10 @@ export default function Home() {
                    width={500}
                    height={500}
             />
-              <CardDescription />
-              <CardFooter />
+              <ClientOnly>
+                  <CardDescription />
+                  <CardFooter />
+              </ClientOnly>
                     </span>
                 </section>
             </div>
