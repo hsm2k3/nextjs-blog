@@ -58,9 +58,10 @@ jobs:
           EC2_INSTANCE_IP_ADDRESS: ${{ secrets.EC2_INSTANCE_IP_ADDRESS }}
           ENV_FILE: ${{ secrets.ENV_FILE }}
           GIT_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+          REPO_NAME: ${{ github.event.repository.name }}
         run: |
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@"$EC2_INSTANCE_IP_ADDRESS" "\
-          cd /var/www/nextjs-blog; \
+          cd /var/www/$REPO_NAME; \
           echo '### Backing up environment file...'; \
           if [ -e .env ]; then \
             echo '### Environment file exists, backing up...'; \
@@ -72,19 +73,27 @@ jobs:
           fi; \
           echo \"$ENV_FILE\" > .env; \
           echo 'Environment file updated successfully'; \
-          if [ ! -d /var/www/nextjs-blog/.git ]; then \
+          echo '### Setting correct permissions...'; \
+          sudo chown -R ec2-user:ec2-user /var/www/$REPO_NAME; \
+          sudo find /var/www/$REPO_NAME -type d -exec chmod 755 {}; \
+          sudo find /var/www/$REPO_NAME -type f -exec chmod 644 {}; \
+           if [ -d /var/www/$REPO_NAME/certbot ]; then \
+            echo '### Setting certbot permissions...'; \
+            sudo chmod -R 755 /var/www/$REPO_NAME/certbot; \
+          fi; \
+          if [ ! -d /var/www/$REPO_NAME/.git ]; then \
             echo '### Cloning the repository to /var/www...'; \
             cd /var/www; \
-            git clone https://x-access-token:$GIT_TOKEN@github.com/hsm2k3/nextjs-blog; \
+            git clone https://x-access-token:$GIT_TOKEN@github.com/hsm2k3/$REPO_NAME; \
             echo '### Cloned the repository.'; \
             echo '### Creating ssl-dhparams.pem...'; \
-            openssl dhparam -out /var/www/nextjs-blog/ssl-dhparams.pem 2048; \
-            if [ -e /var/www/nextjs-blog/ssl-dhparams.pem ]; then \
+            openssl dhparam -out /var/www/$REPO_NAME/ssl-dhparams.pem 2048; \
+            if [ -e /var/www/$REPO_NAME/ssl-dhparams.pem ]; then \
               echo '### Created ssl-dhparams.pem...'; \
             fi; \
           else \
             echo '### Refreshing repository code...'; \
-            cd /var/www/nextjs-blog; \
+            cd /var/www/$REPO_NAME; \
             echo '### Try git pull first, which is safer...'; \
             if git pull origin main; then \
               echo '### Repository updated successfully with git pull'; \
@@ -95,17 +104,24 @@ jobs:
               git fetch origin; \
               git reset --hard origin/main; \
             fi; \
-            chmod +x /var/www/nextjs-blog/deployment/update_server.sh; \
+            chmod +x /var/www/$REPO_NAME/deployment/update_server.sh; \
             echo '### Updating server...'; \
             ./deployment/update_server.sh; \
           fi; \
           echo '### Taking down current images...'; \
-          cd /var/www/nextjs-blog && sudo docker-compose down; \
+          cd /var/www/$REPO_NAME && sudo docker-compose down; \
+          # Add Docker group permissions for the current user if needed
+          if ! groups ec2-user | grep -q docker; then \
+            echo '### Adding ec2-user to the docker group...'; \
+            sudo usermod -aG docker ec2-user; \
+            # This won't take effect until next login, so use sudo for now 
+          fi; \
           echo '### Setting build variables...'; \
           export BUILD_DATE=\$(date -u +'%Y-%m-%dT%H:%M:%SZ'); \
           export GIT_COMMIT=\$(git rev-parse HEAD); \
           echo '### Rebuilding containers with fresh code...'; \
-          docker-compose up -d --force-recreate --no-deps --build; \
+          # Use sudo if not in docker group yet
+          sudo -E docker-compose up -d --force-recreate --no-deps --build;
           echo '### Waiting for containers to be healthy...'; \
           sleep 30; \
           if docker ps | grep -q 'nextjs' && docker ps | grep -q 'nginx'; then \
