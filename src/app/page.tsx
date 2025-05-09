@@ -3,7 +3,7 @@ import Image from "next/image";
 import CardDescription from "@/components/cards/CardDescription";
 import CardFooter from "@/components/cards/CardFooter";
 
-
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
     return (
