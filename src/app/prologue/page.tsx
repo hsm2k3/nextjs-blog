@@ -1,6 +1,6 @@
 import React from 'react';
 // testing out certbot post ssl expiration
-const Page = () => {
+const Prologue = () => {
     return (
         <div className={"flex min-h-screen flex-col items-center justify-between p-24"}>
             <h1>Coming soon...</h1>
@@ -8,4 +8,4 @@ const Page = () => {
     );
 };
 
-export default Page;
+export default Prologue;
