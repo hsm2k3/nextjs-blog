@@ -32,7 +32,7 @@ const CardFooter = () => {
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.twitter.com/AlexBraverman4"
+                    <a href="https://www.twitter.com/AlexBraverman5"
                        target="_blank"
                        className="icon brands">
                         <SvgIcon
