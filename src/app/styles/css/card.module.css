@@ -4,15 +4,18 @@
     transform: rotateX(0deg);
     transition: opacity 1s ease, transform 1s ease;
     -webkit-transition: opacity 1s ease, -webkit-transform 1s ease;
-    padding: 4.5em 3em 3em 3em ;
+    padding: 4.5em 3em 3em 3em; /* Restore wider padding for desktop */
+    margin: 0 auto;
+    box-sizing: border-box;
     background: #ffffff;
     border-radius: 4px;
     cursor: default;
-    max-width: 100%;
+    width: 100%;       /* Keep 100% width */
+    max-width: 90%;    /* Use percentage instead of fixed em */
+    min-width: 320px;  /* Set a minimum width to prevent it from becoming too narrow */
     opacity: 0.95;
     position: relative;
     text-align: center;
-    width: 27em;
     /* fonts */
     color: #414f57;
     font-family: "Source Sans Pro", Helvetica, sans-serif;
@@ -56,7 +59,56 @@
     max-width: 500px;
 }
 
+.icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
 .icons li {
     display: inline-block;
     margin-right: 20px; /* adjust as needed for spacing */
+}
+
+/* Update media queries for responsive adjustments */
+@media screen and (min-width: 1200px) {
+    .main_card {
+        max-width: 45em; /* Fixed width for large screens */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main_card {
+        font-size: 16pt;
+        line-height: 1.8;
+        max-width: 95%; /* Wider percentage on tablets */
+        padding: 4em 2em 2em 2em; /* Adjusted padding */
+    }
+
+    .wrapper {
+        padding: 1em 0.75em; /* Slightly more padding */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .main_card {
+        font-size: 14pt;
+        padding: 3em 1.5em 1.5em 1.5em; /* More horizontal padding */
+        max-width: 96%; /* Almost full width on mobile */
+    }
+
+    .wrapper {
+        padding: 1em 0.5em;
+    }
+
+    .avatar {
+        max-width: 200px;
+    }
+
+    .icons li {
+        margin: 0.25em;
+    }
 }
