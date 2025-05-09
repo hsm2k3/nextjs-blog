@@ -1,7 +1,7 @@
 import cardStyles from '@/app/styles/css/card.module.css';
 import Image from "next/image";
 import CardDescription from "@/components/cards/CardDescription";
-// import CardFooter from "@/components/cards/CardFooter";
+import CardFooter from "@/components/cards/CardFooter";
 // import ClientOnly from "@/components/ClientOnly";
 
 export const dynamic = 'force-dynamic';
@@ -19,7 +19,7 @@ export default function Home() {
             />
               {/*<ClientOnly>*/}
                   <CardDescription />
-                  {/*<CardFooter />*/}
+                  <CardFooter />
               {/*</ClientOnly>*/}
                     </span>
                 </section>
