@@ -16,8 +16,8 @@ export default function Home() {
                    width={500}
                    height={500}
             />
-              {/*<CardDescription />*/}
-              {/*<CardFooter />*/}
+              <CardDescription />
+              <CardFooter />
                     </span>
                 </section>
             </div>
