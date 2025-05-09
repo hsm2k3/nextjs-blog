@@ -62,7 +62,14 @@ jobs:
           ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@"$EC2_INSTANCE_IP_ADDRESS" "\
           cd /var/www/nextjs-blog && \
           echo '### Backing up environment file...' \
-          cp -f .env .env.backup; \
+          if [ -e .env ]; then \
+            echo '### Environment file exists, backing up...'; \
+            cp -f .env .env.backup; \
+          else \
+            echo '### No environment file found...'; \
+            echo '### Creating .env file...'; \
+            touch .env; \
+          fi && \
           echo \"$ENV_FILE\" > .env && \
           echo 'Environment file updated successfully' && \
           if [ ! -d /var/www/nextjs-blog/.git ]; then \
