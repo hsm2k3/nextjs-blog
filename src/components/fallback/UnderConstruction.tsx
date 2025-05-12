@@ -2,26 +2,34 @@
 
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 
 interface UnderConstructionProps {
     title?: string;
     message?: string;
-    gifPath?: string;
+    mediaPath?: string;
+    fallbackMediaPath?: string; // Static fallback
     estimatedCompletion?: string;
     contactEmail?: string;
 }
 
+const fallback= '/assets/under_construction.gif'
+
 const UnderConstruction = ({
                                title = 'Under Construction',
                                message = 'We are working hard to bring you an amazing experience. Please check back soon!',
-                               gifPath = '/icons/under_construction.gif', // Assuming your GIF is named "construction.gif" in the public folder
-                               estimatedCompletion = 'Coming Soon',
+                               mediaPath = '',
+                               fallbackMediaPath = '/assets/under_construction.gif',
+                               estimatedCompletion = '',
                                contactEmail = '',
                            }: UnderConstructionProps) => {
     const [mounted, setMounted] = useState(false);
 
-    // This ensures the component only renders on the client to avoid hydration issues
+    // Helper function to extract file extension
+    const getFileExtension = (filePath: string): string => {
+        if (!filePath) return "";
+        return filePath.split('.').pop()?.toLowerCase() || "";
+    };
+
     useEffect(() => {
         setMounted(true);
     }, []);
@@ -41,14 +49,42 @@ const UnderConstruction = ({
                 <div className="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full">
                     <h1 className="text-3xl font-bold text-gray-800 mb-4">{title}</h1>
 
-                    <div className="relative w-full h-64 sm:h-80 my-6">
-                        <Image
-                            src={gifPath}
-                            alt="Under Construction"
-                            fill
-                            style={{ objectFit: 'contain' }}
-                            priority
-                        />
+                    <div className="relative w-full h-64 sm:h-80 my-6 flex justify-center">
+                        {mediaPath ? (
+                            getFileExtension(mediaPath) === "mp4" ? (
+                                // Only use video element for MP4 files
+                                <video
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="max-w-full max-h-full object-contain"
+                                    poster={fallbackMediaPath}
+                                >
+                                    <source src={mediaPath} type="video/mp4" />
+                                    {/* Fallback for browsers that don't support video */}
+                                    <img
+                                        src={fallbackMediaPath}
+                                        alt="Under Construction"
+                                        className="max-w-full max-h-full object-contain"
+                                    />
+                                </video>
+                            ) : (
+                                // For GIF, WebP, PNG, JPG, etc. - use img tag directly
+                                <img
+                                    src={mediaPath}
+                                    alt="Under Construction"
+                                    className="max-w-full max-h-full object-contain"
+                                />
+                            )
+                        ) : (
+                            // If mediaPath is empty, show the fallback image
+                            <img
+                                src={fallbackMediaPath}
+                                alt="Under Construction"
+                                className="max-w-full max-h-full object-contain"
+                            />
+                        )}
                     </div>
 
                     <p className="text-lg text-gray-600 mb-4">{message}</p>
