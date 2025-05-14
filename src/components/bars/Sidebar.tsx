@@ -1,13 +1,16 @@
 'use client';
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import SvgIcon from "@/components/images/SvgIcon";
-import NavItem from './NavItem';
 
 // Define interface for navigation items
 interface NavItemData {
     iconName: string;
     label: string;
 }
+
+// Dynamically import NavItem with no SSR
+const NavItem = dynamic(() => import('./NavItem'), { ssr: false });
 
 const Sidebar = () => {
     const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
@@ -20,30 +23,34 @@ const Sidebar = () => {
     // Navigation items - can be easily modified or extended
     const navItems: NavItemData[] = [
         { iconName: 'home', label: 'Dashboard' },
-        { iconName: 'users', label: 'Patients' },
-        { iconName: 'file-text', label: 'Reports' },
+        { iconName: 'blog', label: 'Blog' },
+        { iconName: 'users', label: 'Users' },
+        { iconName: 'file-text', label: 'Analytics' },
         { iconName: 'settings', label: 'Settings' },
         { iconName: 'help-circle', label: 'Help' },
+        { iconName: 'logout', label: 'Logout' },
+
     ];
 
     return (
-        <div className="flex h-screen">
+        <div className="h-screen">
             {/* Sidebar */}
             <div
-                className={`bg-white shadow-lg transition-all duration-300 flex flex-col ${
+                className={`bg-white shadow-lg transition-all duration-300 flex flex-col h-full ${
                     isCollapsed ? 'w-16' : 'w-64'
                 }`}
+
             >
                 {/* Header/Toggle area */}
                 <div className="p-4 flex items-center border-b border-gray-200">
                     {!isCollapsed && (
-                        <span className="text-xl font-semibold text-gray-800 mr-auto">RadMenu</span>
+                        <span className="text-xl font-semibold text-gray-800 mr-auto">Navigater</span>
                     )}
                     <button
                         onClick={toggleSidebar}
                         className={`p-2 rounded-md hover:bg-gray-100 ${isCollapsed ? 'mx-auto' : ''}`}
                     >
-                        {isCollapsed ? <SvgIcon name="menu" size={24} /> : <SvgIcon name="x" size={24} />}
+                        {isCollapsed ? <SvgIcon name="hamburger-menu" size={24} /> : <SvgIcon name="hamburger-menu" size={24} />}
                     </button>
                 </div>
 
@@ -59,14 +66,6 @@ const Sidebar = () => {
                         />
                     ))}
                 </div>
-            </div>
-
-            {/* Main content area - placeholder */}
-            <div className="flex-1 p-6 bg-gray-50">
-                <h1 className="text-2xl font-bold text-gray-800 mb-4">Dashboard</h1>
-                <p className="text-gray-600">
-                    This is the main content area. The sidebar can be toggled using the button.
-                </p>
             </div>
         </div>
     );
