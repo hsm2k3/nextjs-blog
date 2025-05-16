@@ -42,6 +42,7 @@ const Sidebar = () => {
         // Common items for all users
         const commonItems = [
             { iconName: 'home', label: 'Home', href: '/' },
+            { iconName: 'prologue', label: 'Prologue', href: '/prologue' },
             { iconName: 'blog', label: 'Blog', href: '/blog' },
             { iconName: 'help-circle', label: 'Help', href: '/help' },
         ];
@@ -103,12 +104,12 @@ const Sidebar = () => {
                         {user.isLoggedIn ? (
                             <div className="text-sm">
                                 <p className="font-semibold">{user.name || 'User'}</p>
-                                <p className="text-gray-500 capitalize">{user.role}</p>
+                                <p className="text-secondary capitalize">{user.role}</p>
                             </div>
                         ) : (
                             <div className="text-sm">
-                                <p className="font-semibold">Welcome, Guest</p>
-                                <p className="text-gray-500">Please login or register</p>
+                                <p className="text-secondary font-semibold">Welcome, Guest</p>
+                                <p className="text-secondary">Please login or register</p>
                             </div>
                         )}
                     </div>

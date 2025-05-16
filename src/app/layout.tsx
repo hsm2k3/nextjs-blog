@@ -1,4 +1,5 @@
 import './globals.css'
+import './styles/css/typography.css'
 import { Inter } from 'next/font/google'
 import {ReduxProvider} from "@/lib/redux";
 
