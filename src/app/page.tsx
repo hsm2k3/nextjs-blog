@@ -18,8 +18,8 @@ export default function Home() {
                    height={500}
             />
               {/*<ClientOnly>*/}
-                  <CardDescription />
-                  <CardFooter />
+              <CardDescription/>
+                  <CardFooter/>
               {/*</ClientOnly>*/}
                     </span>
                 </section>
