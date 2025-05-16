@@ -1,7 +1,10 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import SvgIcon from "@/components/images/SvgIcon";
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleSidebar as toggleSidebarAction } from '@/lib/redux/slices/uiSlice';
+import { RootState } from '@/lib/redux/store'; // You'll need to adjust this import if your store path is different
 
 // Define interfaces
 interface NavItemData {
@@ -21,8 +24,8 @@ interface User {
 const NavItem = dynamic(() => import('./NavItem'), { ssr: false });
 
 const Sidebar = () => {
-    // Start collapsed by default
-    const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
+    const dispatch = useDispatch();
+    const isCollapsed = useSelector((state: RootState) => state.ui.sidebarCollapsed);
 
     // Mock user state - in a real app, this would come from auth context
     const [user, setUser] = useState<User>({
@@ -31,7 +34,7 @@ const Sidebar = () => {
     });
 
     const toggleSidebar = () => {
-        setIsCollapsed(!isCollapsed);
+        dispatch(toggleSidebarAction());
     };
 
     // Get navigation items based on authentication status and role

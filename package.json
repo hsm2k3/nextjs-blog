@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.8.1",
+    "@reduxjs/toolkit": "^2.8.2",
     "@types/node": ">=22.0.0",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
