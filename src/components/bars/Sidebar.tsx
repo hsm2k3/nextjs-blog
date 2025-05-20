@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import SvgIcon from "@/components/images/SvgIcon";
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +25,7 @@ interface User {
 const NavItem = dynamic(() => import('./NavItem'), { ssr: false });
 
 const Sidebar = () => {
+    const pathname = usePathname();
     const dispatch = useDispatch();
     const isCollapsed = useSelector((state: RootState) => state.ui.sidebarCollapsed);
 
@@ -129,6 +131,7 @@ const Sidebar = () => {
                             isCollapsed={isCollapsed}
                             onClick={() => console.log(`Navigating to ${item.label}`)}
                             href={item.href}
+                            isActive={item.href === pathname}
                         />
                     ))}
                 </div>
