@@ -17,3 +17,15 @@
 .chevron-right-square {
     filter: invert(7%) sepia(11%) saturate(16%) hue-rotate(314deg) brightness(97%) contrast(91%);
 }
+
+.primary {
+    filter: var(--filter-primary);
+}
+
+.secondary {
+    filter: var(--filter-secondary);
+}
+
+.accent {
+    filter: var(--filter-accent);
+}

@@ -17,7 +17,8 @@ export const metadata = {
       { url: '/alex-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
     apple: { url: '/alex-16x16.png' },
-  }
+  },
+  colorScheme: 'dark light', // Support both schemes
 }
 
 export default function RootLayout({
@@ -26,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="light dark:dark">
       <body className={inter.className}>
         <ReduxProvider>{children}</ReduxProvider>
       </body>

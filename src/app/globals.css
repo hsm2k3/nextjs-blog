@@ -3,17 +3,50 @@
 @tailwind utilities;
 
 :root {
+  /* Light mode variables */
+  --text-primary: #1e3a8a; /* Deeper blue for light mode */
+  --text-secondary: #333333;
+  --text-tertiary: #555555;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f4f6;
+  --bg-card: #ffffff;
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --filter-primary: invert(7%) sepia(11%) saturate(16%) hue-rotate(314deg) brightness(97%) contrast(91%);
+  --filter-secondary: invert(45%) sepia(12%) saturate(343%) hue-rotate(182deg) brightness(95%) contrast(89%);
+  --filter-accent: invert(43%) sepia(57%) saturate(1909%) hue-rotate(158deg) brightness(96%) contrast(101%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Dark mode variables */
+    --text-primary: #93c5fd; /* Light blue for dark mode, matching blue-300 */
+    --text-secondary: #e5e7eb;
+    --text-tertiary: #9ca3af;
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-card: #1e293b;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    --filter-primary: invert(100%) sepia(0%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+    --filter-secondary: invert(70%) sepia(9%) saturate(175%) hue-rotate(179deg) brightness(87%) contrast(84%);
+    --filter-accent: invert(56%) sepia(98%) saturate(1195%) hue-rotate(175deg) brightness(103%) contrast(91%);
   }
+}
+
+/* Add dark mode class that can be toggled */
+.dark {
+  --text-primary: #93c5fd;
+  --text-secondary: #e5e7eb;
+  --text-tertiary: #9ca3af;
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-card: #1e293b;
+  --filter-primary: invert(100%) sepia(0%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+  --filter-secondary: invert(70%) sepia(9%) saturate(175%) hue-rotate(179deg) brightness(87%) contrast(84%);
+  --filter-accent: invert(56%) sepia(98%) saturate(1195%) hue-rotate(175deg) brightness(103%) contrast(91%);
 }
 
 body {

@@ -39,15 +39,15 @@ const UnderConstruction = ({
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-[var(--bg-secondary)]">
             <Head>
                 <title>{title}</title>
                 <meta name="description" content="This page is under construction" />
             </Head>
 
             <main className="flex flex-col items-center justify-center w-full flex-1 px-4 sm:px-20 text-center">
-                <div className="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full">
-                    <h1 className="text-3xl font-bold text-gray-800 mb-4">{title}</h1>
+                <div className="bg-[var(--bg-card)] p-6 rounded-lg shadow-md max-w-2xl w-full">
+                    <h1 className="text-3xl font-bold text-[var(--text-primary)] mb-4">{title}</h1>
 
                     <div className="relative w-full h-64 sm:h-80 my-6 flex justify-center">
                         {mediaPath ? (
@@ -87,20 +87,20 @@ const UnderConstruction = ({
                         )}
                     </div>
 
-                    <p className="text-lg text-gray-600 mb-4">{message}</p>
+                    <p className="text-lg text-[var(--text-secondary)] mb-4">{message}</p>
 
                     {estimatedCompletion && (
-                        <p className="text-md text-gray-500 mb-2">
+                        <p className="text-md text-[var(--text-tertiary)] mb-2">
                             <span className="font-semibold">Estimated Completion:</span> {estimatedCompletion}
                         </p>
                     )}
 
                     {contactEmail && (
-                        <p className="text-md text-gray-500 mt-4">
+                        <p className="text-md text-[var(--text-tertiary)] mt-4">
                             <span className="font-semibold">Questions?</span> Contact us at{' '}
                             <a
                                 href={`mailto:${contactEmail}`}
-                                className="text-blue-500 hover:text-blue-700 underline"
+                                className="text-[var(--text-primary)] hover:opacity-80 underline"
                             >
                                 {contactEmail}
                             </a>

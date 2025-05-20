@@ -81,18 +81,18 @@ const Sidebar = () => {
     return (
         <div className="h-screen">
             <div
-                className={`bg-white shadow-lg transition-all duration-300 flex flex-col h-full ${
+                className={`bg-[var(--bg-card)] shadow-lg transition-all duration-300 flex flex-col h-full ${
                     isCollapsed ? 'w-16' : 'w-64'
                 }`}
             >
                 {/* Header with toggle button */}
-                <div className="p-4 flex items-center border-b border-gray-200">
+                <div className="p-4 flex items-center border-b border-[var(--bg-secondary)]">
                     {!isCollapsed && (
-                        <span className="text-xl font-semibold text-gray-800 mr-auto">Navigater</span>
+                        <span className="text-xl font-semibold text-[var(--text-primary)] mr-auto">Navigater</span>
                     )}
                     <button
                         onClick={toggleSidebar}
-                        className={`p-2 rounded-md hover:bg-gray-100 ${isCollapsed ? 'mx-auto' : ''}`}
+                        className={`p-2 rounded-md hover:bg-[var(--bg-secondary)] ${isCollapsed ? 'mx-auto' : ''}`}
                     >
                         <SvgIcon name="hamburger-menu" size={24} />
                     </button>
@@ -100,16 +100,20 @@ const Sidebar = () => {
 
                 {/* User Status Banner */}
                 {!isCollapsed && (
-                    <div className="px-4 py-3 border-b border-gray-200">
+                    <div className="px-4 py-3 border-b border-[var(--bg-secondary)]">
                         {user.isLoggedIn ? (
                             <div className="text-sm">
-                                <p className="font-semibold">{user.name || 'User'}</p>
-                                <p className="text-secondary capitalize">{user.role}</p>
+                                <p className="text-[var(--text-secondary)]">
+                                    <span className="font-semibold text-[var(--text-primary)]">{user.name || 'User'}</span>
+                                </p>
+                                <p className="text-[var(--text-secondary)] capitalize">{user.role}</p>
                             </div>
                         ) : (
                             <div className="text-sm">
-                                <p className="text-secondary font-semibold">Welcome, Guest</p>
-                                <p className="text-secondary">Please login or register</p>
+                                <p className="text-[var(--text-secondary)]">
+                                    Welcome, <span className="font-semibold text-[var(--text-primary)]">Guest</span>
+                                </p>
+                                <p className="text-[var(--text-secondary)]">Please login or register</p>
                             </div>
                         )}
                     </div>

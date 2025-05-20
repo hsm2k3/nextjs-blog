@@ -6,16 +6,25 @@ interface SvgIconProps {
     size?: number;
     className?: string;
     alt?: string;
+    variant?: 'primary' | 'secondary' | 'accent' | null;
 }
 
-export default function SvgIcon({ name, size = 64, className = '', alt = '' }: SvgIconProps) {
+export default function SvgIcon({
+                                    name,
+                                    size = 24,
+                                    className = '',
+                                    alt = '',
+                                    variant = null
+                                }: SvgIconProps) {
+    const variantClass = variant ? iconStyles[variant] : '';
+
     return (
         <Image
             src={`/icons/${name}.svg`}
             width={size}
             height={size}
             alt={alt || `${name} icon`}
-            className={`${iconStyles.icon} ${iconStyles[name]} ${className}`}
+            className={`${iconStyles.icon} ${variantClass} ${className}`}
         />
     );
 }
