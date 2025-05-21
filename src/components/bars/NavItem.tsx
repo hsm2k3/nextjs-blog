@@ -25,6 +25,7 @@ const NavItem = ({
                 name={iconName}
                 size={20}
                 variant={isActive ? "accent" : "secondary"}
+                useSystemTheme={true}
             />
             {!isCollapsed && (
                 <span className={`ml-3 ${isActive ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>

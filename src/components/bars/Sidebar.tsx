@@ -96,7 +96,7 @@ const Sidebar = () => {
                         onClick={toggleSidebar}
                         className={`p-2 rounded-md hover:bg-[var(--bg-secondary)] ${isCollapsed ? 'mx-auto' : ''}`}
                     >
-                        <SvgIcon name="hamburger-menu" size={24} />
+                        <SvgIcon name="hamburger-menu" size={24} useSystemTheme={true} />
                     </button>
                 </div>
 
