@@ -1,17 +1,18 @@
 'use client';
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import SvgIcon from "@/components/images/SvgIcon";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar as toggleSidebarAction } from '@/lib/redux/slices/uiSlice';
-import { RootState } from '@/lib/redux/store'; // You'll need to adjust this import if your store path is different
+import { RootState } from '@/lib/redux/store';
 
 // Define interfaces
 interface NavItemData {
     iconName: string;
     label: string;
     href?: string;
+    onClick?: () => void;
 }
 
 interface User {
@@ -26,14 +27,60 @@ const NavItem = dynamic(() => import('./NavItem'), { ssr: false });
 
 const Sidebar = () => {
     const pathname = usePathname();
+    const router = useRouter();
     const dispatch = useDispatch();
     const isCollapsed = useSelector((state: RootState) => state.ui.sidebarCollapsed);
 
-    // Mock user state - in a real app, this would come from auth context
+    // Initialize user state
     const [user, setUser] = useState<User>({
         isLoggedIn: false,
         role: 'guest'
     });
+
+    // Check authentication on component mount
+    useEffect(() => {
+        const checkAuth = () => {
+            const authToken = localStorage.getItem('authToken');
+            const userJson = localStorage.getItem('user');
+
+            if (authToken && userJson) {
+                try {
+                    const userData = JSON.parse(userJson);
+                    setUser({
+                        id: userData.id,
+                        name: userData.name,
+                        role: userData.role || 'user',
+                        isLoggedIn: true
+                    });
+                } catch (e) {
+                    // If JSON parsing fails, clear invalid data
+                    localStorage.removeItem('authToken');
+                    localStorage.removeItem('user');
+                    setUser({
+                        isLoggedIn: false,
+                        role: 'guest'
+                    });
+                }
+            }
+        };
+
+        checkAuth();
+
+        // Re-check auth when window gains focus (in case of logout in another tab)
+        const handleFocus = () => checkAuth();
+        window.addEventListener('focus', handleFocus);
+        return () => window.removeEventListener('focus', handleFocus);
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('user');
+        setUser({
+            isLoggedIn: false,
+            role: 'guest'
+        });
+        router.push('/login');
+    };
 
     const toggleSidebar = () => {
         dispatch(toggleSidebarAction());
@@ -53,8 +100,8 @@ const Sidebar = () => {
         if (!user.isLoggedIn) {
             return [
                 ...commonItems,
-                { iconName: 'users', label: 'Login', href: '/login' },
                 { iconName: 'file-text', label: 'Register', href: '/register' },
+                { iconName: 'users', label: 'Login', href: '/login' },
             ];
         }
 
@@ -63,7 +110,7 @@ const Sidebar = () => {
             ...commonItems,
             { iconName: 'users', label: 'Profile', href: '/profile' },
             { iconName: 'settings', label: 'Settings', href: '/settings' },
-            { iconName: 'logout', label: 'Logout', href: '/logout' },
+            { iconName: 'logout', label: 'Logout', onClick: handleLogout },
         ];
 
         // Add admin-specific items
@@ -129,7 +176,7 @@ const Sidebar = () => {
                             iconName={item.iconName}
                             label={item.label}
                             isCollapsed={isCollapsed}
-                            onClick={() => console.log(`Navigating to ${item.label}`)}
+                            onClick={item.onClick || (() => console.log(`Navigating to ${item.label}`))}
                             href={item.href}
                             isActive={item.href === pathname}
                         />
