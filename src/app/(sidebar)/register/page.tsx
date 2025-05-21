@@ -1,24 +1,29 @@
 'use client';
-import DashboardLayout from "@/components/boards/Dashboard";
-import { useUser } from '@/lib/redux/hooks/useUser';
-import UnderConstruction from "@/components/fallback/UnderConstruction";
 
+import {useState} from 'react';
+import AuthLayout from '@/components/auth/AuthLayout';
+import RegisterForm from './_components/RegisterForm';
+import AuthInfo from './_components/AuthInfo';
+import AuthToggle from './_components/AuthToggle';
 
 const RegisterPage = () => {
-    const user = useUser();
+    const [isLoading, setIsLoading] = useState(false);
+
     return (
-      <>
-          <DashboardLayout user={user.name}>
-              <UnderConstruction
-                  title="Still Working On This Part"
-                  message="Our team is working hard to complete this section of the site. Please check back later!"
-                  mediaPath="/assets/giphy.webp"
-                  estimatedCompletion="June 2025"
-                  // contactEmail="support@yourdomain.com"
-              />
-          </DashboardLayout>
-      </>
+        <AuthLayout>
+            <div className="w-full max-w-md mx-auto space-y-8">
+                <div className="text-center">
+                    <h1 className="text-2xl font-bold text-[var(--text-primary)]">Create an Account</h1>
+                    <p className="mt-2 text-[var(--text-secondary)]">Join our community to start creating and sharing
+                        content</p>
+                </div>
+
+                <RegisterForm isLoading={isLoading} setIsLoading={setIsLoading}/>
+                <AuthInfo/>
+                <AuthToggle type="register"/>
+            </div>
+        </AuthLayout>
     );
-}
+};
 
 export default RegisterPage;
