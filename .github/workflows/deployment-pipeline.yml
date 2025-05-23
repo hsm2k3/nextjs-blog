@@ -131,3 +131,38 @@ jobs:
           else \
             echo '### Container startup check failed, skipping volume cleanup'; \
           fi"
+      - name: Deploy to Kubernetes
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ github.event.repository.name }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Set the deployment date at runtime
+          export DEPLOY_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          
+          # Update kubernetes manifests with the new image and version info
+          sed -i "s|\${ECR_REGISTRY}|$ECR_REGISTRY|g" kubernetes/deployment.yaml
+          sed -i "s|\${ECR_REPOSITORY}|$ECR_REPOSITORY|g" kubernetes/deployment.yaml
+          sed -i "s|\${IMAGE_TAG}|$IMAGE_TAG|g" kubernetes/deployment.yaml
+          sed -i "s|\$(date)|$DEPLOY_DATE|g" kubernetes/deployment.yaml
+          
+          # Apply kubernetes manifests
+          kubectl apply -f kubernetes/configmap.yaml
+          kubectl apply -f kubernetes/deployment.yaml
+          kubectl apply -f kubernetes/service.yaml
+          
+          # Wait for deployment to complete
+          kubectl rollout status deployment/nextjs-app
+          
+          # Record deployment information
+          echo "Deployed version $IMAGE_TAG at $(date)" >> deployment_history.txt
+          
+          # Check deployment status and output info
+          kubectl get deployments
+          kubectl get pods -l app=nextjs-app
+          
+          # Store the logs from the deployment
+          mkdir -p deployment_logs
+          for pod in $(kubectl get pods -l app=nextjs-app -o=name); do
+            kubectl logs $pod > deployment_logs/$(echo $pod | cut -d '/' -f 2).log
+          done

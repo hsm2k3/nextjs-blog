@@ -10,6 +10,10 @@ const nextConfig = {
     //     contentDispositionType: 'attachment',
     //     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     // },
+    reactStrictMode: true,
+    images: {
+        domains: ['api.dicebear.com'],
+    },
 }
 
 module.exports = nextConfig

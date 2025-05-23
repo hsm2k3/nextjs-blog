@@ -7,8 +7,6 @@ import ExperienceTimeline from "@/components/profile/ExperienceTimeline";
 import ContactSection from "@/components/profile/ContactSection";
 import { useUser } from '@/lib/redux/hooks/useUser';
 
-
-
 const Prologue = () => {
     const user = useUser();
     return (
@@ -25,31 +23,31 @@ const Prologue = () => {
 
                 <div className="grid md:grid-cols-3 gap-8 mb-12">
                     <div className="md:col-span-2">
-                        <h2 className="text-2xl font-bold mb-6 text-blue-300">How I Can Help</h2>
+                        <h2 className="text-2xl font-bold mb-6 text-[var(--text-primary)]">How I Can Help</h2>
                         <div className="prose max-w-none">
-                            <p className="mb-4 text-gray-300">
+                            <p className="mb-4 text-[var(--text-secondary)]">
                                 With extensive experience in both radiology systems administration and full-stack software development,
                                 I offer a unique combination of healthcare IT expertise and modern programming skills.
                             </p>
-                            <p className="mb-4 text-gray-300">
+                            <p className="mb-4 text-[var(--text-secondary)]">
                                 Whether you need to optimize your healthcare imaging workflow, integrate disparate medical systems,
                                 or develop custom software solutions, I can translate complex technical requirements into
                                 practical, efficient implementations.
                             </p>
                         </div>
 
-                        <h2 className="text-2xl font-bold mt-10 mb-6 text-blue-300">My Approach</h2>
+                        <h2 className="text-2xl font-bold mt-10 mb-6 text-[var(--text-primary)]">My Approach</h2>
                         <div className="grid md:grid-cols-2 gap-6">
-                            <div className="bg-gray-800 p-6 rounded-lg shadow-md">
-                                <h3 className="text-xl font-semibold mb-3 text-blue-200">Technical Excellence</h3>
-                                <p className="text-gray-300">
+                            <div className="bg-[var(--bg-card)] p-6 rounded-lg shadow-md">
+                                <h3 className="text-xl font-semibold mb-3 text-[var(--text-primary)]">Technical Excellence</h3>
+                                <p className="text-[var(--text-secondary)]">
                                     I bring deep technical knowledge across healthcare systems and modern development stacks,
                                     ensuring solutions that are robust, secure, and compliant with healthcare regulations.
                                 </p>
                             </div>
-                            <div className="bg-gray-800 p-6 rounded-lg shadow-md">
-                                <h3 className="text-xl font-semibold mb-3 text-blue-200">Business Impact</h3>
-                                <p className="text-gray-300">
+                            <div className="bg-[var(--bg-card)] p-6 rounded-lg shadow-md">
+                                <h3 className="text-xl font-semibold mb-3 text-[var(--text-primary)]">Business Impact</h3>
+                                <p className="text-[var(--text-secondary)]">
                                     My work directly improves operational efficiency, enhances diagnostic capabilities, and
                                     creates measurable improvements in healthcare delivery and technology integration.
                                 </p>
@@ -81,7 +79,7 @@ const Prologue = () => {
                 </div>
 
                 <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-6 text-blue-300">Key Experience</h2>
+                    <h2 className="text-2xl font-bold mb-6 text-[var(--text-primary)]">Key Experience</h2>
                     <ExperienceTimeline
                         experiences={[
                             {
@@ -121,9 +119,9 @@ const Prologue = () => {
                     />
                 </section>
 
-                <section className="bg-gray-800 rounded-lg shadow-md p-8">
-                    <h2 className="text-2xl font-bold mb-6 text-blue-300">Ready to Collaborate?</h2>
-                    <p className="mb-6 text-gray-300">
+                <section className="bg-[var(--bg-card)] rounded-lg shadow-md p-8">
+                    <h2 className="text-2xl font-bold mb-6 text-[var(--text-primary)]">Ready to Collaborate?</h2>
+                    <p className="mb-6 text-[var(--text-secondary)]">
                         I&#39;m interested in consulting opportunities, technical challenges in healthcare IT,
                         and software engineering projects. Let&#39;s discuss how my expertise can help your organization.
                     </p>
