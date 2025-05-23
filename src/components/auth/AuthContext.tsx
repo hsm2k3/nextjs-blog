@@ -2,6 +2,12 @@
 
 import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
 
+interface User {
+    id: string;
+    name: string;
+    email: string;
+}
+
 const mockUserData: User = {
     id: '1',
     name: 'Demo User',

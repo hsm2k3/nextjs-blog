@@ -19,6 +19,6 @@ export const useAvatarApi = () => {
         getDicebearUrl,
         fetchAvatar,
         loading: api.loading,
-        error: api.error
+        error: api.apiError
     };
 };

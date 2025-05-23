@@ -38,7 +38,7 @@ export const useBlogApi = () => {
 
     return {
         loading: api.loading,
-        error: api.error,
+        error: api.apiError,
         getBlogPosts,
         getBlogPost
     };
