@@ -65,7 +65,7 @@ export const ApiProvider = ({
 
         try {
             setLoading(true);
-            setError(null);
+            setApiError(null);
 
             // Build URL with query parameters
             let url = `${baseUrl}${endpoint}`;
@@ -131,7 +131,7 @@ export const ApiProvider = ({
     return (
         <ApiContext.Provider value={{
             loading,
-            error: apiError,
+            apiError,
             makeRequest}}>
             {children}
         </ApiContext.Provider>
