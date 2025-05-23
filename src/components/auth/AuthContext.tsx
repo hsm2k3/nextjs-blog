@@ -1,11 +1,18 @@
-// src/context/AuthContext.tsx
 'use client';
 
 import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
 
+const mockUserData: User = {
+    id: '1',
+    name: 'Demo User',
+    email: 'demo@example.com',
+    // add other required user properties
+};
+
 interface AuthContextType {
     isAuthenticated: boolean;
-    login: () => void;
+    user: User | null;
+    login: (email: string, password: string) => Promise<void>;
     logout: () => void;
 }
 
@@ -13,6 +20,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState<User | null>(null);
 
     // Check if user is logged in on mount (from localStorage, cookies, etc.)
     useEffect(() => {
@@ -21,19 +29,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setIsAuthenticated(!!hasToken);
     }, []);
 
-    const login = () => {
+    const login = async (email: string, password: string) => {
         // Demo implementation - replace with actual login logic
         localStorage.setItem('authToken', 'demo-token');
         setIsAuthenticated(true);
+        setUser(mockUserData);
     };
 
     const logout = () => {
         localStorage.removeItem('authToken');
         setIsAuthenticated(false);
+        setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+        <AuthContext.Provider value={{
+            isAuthenticated,
+            user,
+            login,
+            logout,
+        }}>
             {children}
         </AuthContext.Provider>
     );
