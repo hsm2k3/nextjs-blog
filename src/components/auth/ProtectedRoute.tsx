@@ -17,7 +17,9 @@ export default function ProtectedRoute({
     const { isAuthenticated } = useAuth();
 
     useEffect(() => {
+        console.log("Auth state:", { isAuthenticated });
         if (!isAuthenticated) {
+            console.log("Redirecting to:", redirectPath);
             router.push(redirectPath);
         }
     }, [isAuthenticated, router, redirectPath]);
