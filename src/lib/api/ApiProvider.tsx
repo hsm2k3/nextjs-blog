@@ -1,11 +1,18 @@
-// src/lib/api/ApiProvider.tsx
-import { createContext, useContext, ReactNode, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useUser } from '@/lib/redux/hooks/useUser';
+import {createContext, useContext, ReactNode, useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {useUser} from '@/lib/redux/hooks/useUser';
 
-// Define storage strategy options
-export type StorageStrategy = 'redux' | 'local' | 'both' | 'none';
-export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+// Define constants
+export const HTTP_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'] as const;
+export const STORAGE_STRATEGIES = ['redux', 'local', 'both', 'none'] as const;
+
+// Derive types from constants
+export type HttpMethod = typeof HTTP_METHODS[number];
+export type StorageStrategy = typeof STORAGE_STRATEGIES[number];
+
+// // Define storage strategy options
+// export type StorageStrategy = 'redux' | 'local' | 'both' | 'none';
+// export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 export interface ApiRequestOptions {
     endpoint: string;
@@ -21,7 +28,7 @@ export interface ApiRequestOptions {
 
 interface ApiContextState {
     loading: boolean;
-    error: Error | null;
+    apiError: Error | null;  // Renamed from 'error' to 'apiError'
     makeRequest: <T>(options: ApiRequestOptions) => Promise<T | null>;
 }
 
@@ -39,11 +46,11 @@ export const ApiProvider = ({
                                 defaultStorageStrategy = 'redux',
                             }: ApiProviderProps) => {
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<Error | null>(null);
+    const [apiError, setApiError] = useState<Error | null>(null);
     const dispatch = useDispatch();
     const user = useUser();
 
-    const makeRequest = async <T,>(options: ApiRequestOptions): Promise<T | null> => {
+    const makeRequest = async <T, >(options: ApiRequestOptions): Promise<T | null> => {
         const {
             endpoint,
             method = 'POST', // Default to POST for security
@@ -95,13 +102,15 @@ export const ApiProvider = ({
             // Store data based on storage strategy
             if (['redux', 'both'].includes(storageStrategy)) {
                 if (reduxAction) {
-                    dispatch(reduxAction(data));
+                    const action = reduxAction(data);
+                    dispatch(action);
                 } else if (storageKey) {
-                    dispatch({
+                    const action = {
                         type: `API_${storageKey.toUpperCase()}_SUCCESS`,
                         payload: data,
-                    });
-                }
+                    };
+                    dispatch(action);
+        }
             }
 
             if (['local', 'both'].includes(storageStrategy) && storageKey) {
@@ -111,7 +120,7 @@ export const ApiProvider = ({
             return data as T;
         } catch (err) {
             const error = err instanceof Error ? err : new Error('Unknown error occurred');
-            setError(error);
+            setApiError(error); // Change from setError to setApiError
             console.error('API request failed:', error);
             return null;
         } finally {
@@ -120,7 +129,10 @@ export const ApiProvider = ({
     };
 
     return (
-        <ApiContext.Provider value={{ loading, error, makeRequest }}>
+        <ApiContext.Provider value={{
+            loading,
+            error: apiError,
+            makeRequest}}>
             {children}
         </ApiContext.Provider>
     );

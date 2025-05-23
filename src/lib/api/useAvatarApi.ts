@@ -1,4 +1,3 @@
-// src/lib/api/useAvatarApi.ts
 import { useApi } from './ApiProvider';
 import { getDicebearUrl } from './avatarUtils';
 

@@ -1,4 +1,3 @@
-// src/lib/api/useBlogApi.ts
 import { useApi } from './ApiProvider';
 import { BlogApiResponse, BlogPost } from '@/app/(sidebar)/blog/_data/mockBlogData';
 

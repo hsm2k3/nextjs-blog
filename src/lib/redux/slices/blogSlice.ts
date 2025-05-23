@@ -1,4 +1,3 @@
-// src/lib/redux/slices/blogSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BlogApiResponse, BlogPost } from '@/app/(sidebar)/blog/_data/mockBlogData';
 
