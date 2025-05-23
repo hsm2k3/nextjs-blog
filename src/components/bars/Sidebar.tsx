@@ -153,7 +153,7 @@ const Sidebar = () => {
                         {user.isLoggedIn ? (
                             <div className="text-sm">
                                 <p className="text-[var(--text-secondary)]">
-                                    <span className="font-semibold text-[var(--text-primary)]">{user.name || 'User'}</span>
+                                    Welcome, <span className="font-semibold text-[var(--text-primary)]">{user.name || 'User'}</span>
                                 </p>
                                 <p className="text-[var(--text-secondary)] capitalize">{user.role}</p>
                             </div>

@@ -7,6 +7,7 @@ export type UserType = {
     role: 'guest' | 'user' | 'admin';
     avatar?: string;
     isLoggedIn: boolean;
+    token?: string;
 };
 
 const guestUser: UserType = {
