@@ -3,13 +3,13 @@ services:
     build:
       context: .
       args:
-        NODE_ENV: production
+        NODE_ENV: ${DOCKER_NODE_ENV}
         BUILD_DATE: ${BUILD_DATE}
         GIT_COMMIT: ${GIT_COMMIT}
     env_file:
       - .env
     environment:
-      NODE_ENV: production
+      NODE_ENV: ${DOCKER_NODE_ENV}
     ports:
       - "3000:3000"
     volumes:
@@ -30,7 +30,7 @@ services:
       - CERTIFICATION_EMAIL=${DOCKER_CERTIFICATION_EMAIL}
       - DOMAIN_PATH=${DOCKER_DOMAIN_PATH}
       - SERVER_NAMES=${DOCKER_SERVER_NAMES}
-      - NODE_ENV=production
+      - NODE_ENV=${DOCKER_NODE_ENV}
 #    entrypoint:
 #        - /bin/sh
 #        - -c
