@@ -27,7 +27,7 @@ RUN npm run build
 EXPOSE 3000
 
 # Accept a development environment variable(defaults to "production")
-ARG NODE_ENV
+ARG NODE_ENV=production
 ENV NODE_ENV=${DOCKER_NODE_ENV}
 
 # Start the Next.js application based on the environment
