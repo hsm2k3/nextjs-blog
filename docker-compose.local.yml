@@ -21,11 +21,12 @@ services:
       - ./public:/app/public
       - /app/.next
     container_name: nextjs
-    restart: always
+    restart: unless-stopped
 
   nginx:
     image: nginx
     container_name: nginx
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"

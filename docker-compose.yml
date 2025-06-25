@@ -17,6 +17,7 @@ services:
       - ./public:/app/public
       - /app/node_modules
     container_name: nextjs
+    restart: unless-stopped
 
   nginx:
     build: ./nginx
@@ -46,6 +47,7 @@ services:
     depends_on:
       - app
     container_name: nginx
+    restart: unless-stopped
 
   certbot:
     image: certbot/certbot
@@ -69,3 +71,4 @@ services:
     depends_on:
       - nginx
     container_name: certbot
+    restart: unless-stopped
