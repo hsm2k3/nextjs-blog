@@ -134,6 +134,10 @@ jobs:
           else \
             echo '### Container startup check failed, skipping volume cleanup'; \
           fi"
+      - name: Set up kubectl (recommended)
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest' # or specify e.g. '1.30.0'
       - name: Deploy to Kubernetes
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
