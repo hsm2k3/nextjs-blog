@@ -83,9 +83,20 @@ const Prologue = () => {
                     <ExperienceTimeline
                         experiences={[
                             {
+                                role: "Clinical IT Optimization Manager (PACS Optimization & Support)",
+                                company: "Radiology Partners",
+                                period: "Dec 2024 – Present",
+                                highlights: [
+                                    "Optimized PACS, VNA, and AI systems across multiple hospital networks improving performance and scalability",
+                                    "Managed ServiceNow ticket triage and root-cause analysis keeping downtime minimal while maintaining HIPAA compliance",
+                                    "Reduced PACS exam load times through standardized hanging protocols and improved auto-routing rules",
+                                    "Supported migration projects involving 200+ modalities and 50+ facilities protecting data integrity"
+                                ]
+                            },
+                            {
                                 role: "PACS/Systems Administrator",
                                 company: "Hackensack Meridian Health Pascack Valley Medical Center",
-                                period: "Jan 2024 – Present",
+                                period: "Jan 2024 – Dec 2024",
                                 highlights: [
                                     "Spearheaded disaster recovery efforts following cyber-attack",
                                     "Leading integration of Epic, PACS, and modalities with third-party systems",
