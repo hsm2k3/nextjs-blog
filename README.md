@@ -2,6 +2,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+For local development run:
+
+   ```bash
+   
+   docker compose -f docker-compose.local.yml up --force-recreate --no-deps --build
+   ```
+
 First, run the development server:
 
 ```bash
